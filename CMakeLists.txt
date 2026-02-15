@@ -1,0 +1,32 @@
+cmake_minimum_required(VERSION 3.28)
+project(SuperMarioPhysicsTest)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+include(FetchContent)
+FetchContent_Declare(SDL
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+    GIT_TAG release-3.4.0
+    GIT_SHALLOW ON
+    EXCLUDE_FROM_ALL
+    SYSTEM)
+FetchContent_MakeAvailable(SDL)
+
+add_executable(SuperMarioPhysicsTest
+        src/main.cpp
+        src/sprite.cpp
+        src/sprite.hpp
+)
+target_compile_features(SuperMarioPhysicsTest PRIVATE cxx_std_17)
+target_link_libraries(SuperMarioPhysicsTest PRIVATE SDL3::SDL3)
+
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT SuperMarioPhysicsTest)
+
+add_custom_target(copy_resources ALL
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/Resources
+        $<TARGET_FILE_DIR:SuperMarioPhysicsTest>/Resources
+)
+
+add_dependencies(SuperMarioPhysicsTest copy_resources)
+
