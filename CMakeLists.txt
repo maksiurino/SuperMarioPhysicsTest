@@ -16,6 +16,8 @@ add_executable(SuperMarioPhysicsTest
         src/main.cpp
         src/sprite.cpp
         src/sprite.hpp
+        src/Maths.cpp
+        src/Maths.hpp
 )
 target_compile_features(SuperMarioPhysicsTest PRIVATE cxx_std_17)
 target_link_libraries(SuperMarioPhysicsTest PRIVATE SDL3::SDL3)

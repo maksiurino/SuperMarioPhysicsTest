@@ -1,1 +1,20 @@
 #pragma once
+
+#include <string>
+#include <SDL3/SDL.h>
+#include "Maths.hpp"
+
+class Sprite
+{
+    public:
+    Sprite(const std::string& path, SDL_Renderer *renderer);
+    Vector2f position = Vector2f();
+    void draw(SDL_Renderer *renderer) const;
+    [[nodiscard]] float getScale() const;
+    void setScale(float new_scale);
+    private:
+    SDL_Texture* texture;
+    int texture_width;
+    int texture_height;
+    float scale = 1;
+};
