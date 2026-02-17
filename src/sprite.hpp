@@ -12,9 +12,14 @@ class Sprite
     void draw(SDL_Renderer *renderer) const;
     [[nodiscard]] float getScale() const;
     void setScale(float new_scale);
+    [[nodiscard]] SDL_FRect getDrawRect() const;
+    void setDrawRect(SDL_FRect new_draw_rect);
+    [[nodiscard]] SDL_Texture* getTexture() const;
     private:
     SDL_Texture* texture;
     int texture_width;
     int texture_height;
     float scale = 1;
+    SDL_FRect draw_rect;
+    bool draw_rect_set = false;
 };

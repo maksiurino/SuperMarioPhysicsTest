@@ -9,8 +9,8 @@ static SDL_Window *window = nullptr;
 static SDL_Renderer *renderer = nullptr;
 static Sprite *sprite = nullptr;
 
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 480
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 720
 
 /* This function runs once at startup. */
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
@@ -29,9 +29,13 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
-    SDL_SetRenderLogicalPresentation(renderer, 1280, 720, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_LETTERBOX);
 
-    sprite = new Sprite("sample.png", renderer);
+    SDL_SetDefaultTextureScaleMode(renderer, SDL_SCALEMODE_NEAREST);
+
+    sprite = new Sprite("Sprite/MarioSmall", renderer);
+    sprite->setScale(3);
+    sprite->setDrawRect(SDL_FRect{0, 1, 12, 16});
 
     return SDL_APP_CONTINUE; /* carry on with the program! */
 }
@@ -51,7 +55,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 {
 
     /* as you can see from this, rendering draws over whatever was drawn before it. */
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);  /* black, full alpha */
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);  /* black, full alpha */
     SDL_RenderClear(renderer);  /* start with a blank canvas. */
 
     /* Just draw the static texture a few times. You can think of it like a
