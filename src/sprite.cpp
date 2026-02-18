@@ -61,12 +61,12 @@ void Sprite::setDrawRect(const SDL_FRect new_draw_rect)
     draw_rect_set = true;
 }
 
-void Sprite::setPosition(const Vector2f* new_position)
+void Sprite::setPosition(const std::vector<float>* new_position)
 {
     position = *new_position;
 }
 
-Vector2f Sprite::getPosition() const
+std::vector<float> Sprite::getPosition() const
 {
     return position;
 }
@@ -75,8 +75,8 @@ void Sprite::draw(SDL_Renderer* renderer) const
 {
     SDL_FRect dst_rect;
 
-    dst_rect.x = position.x;
-    dst_rect.y = position.y;
+    dst_rect.x = position[0];
+    dst_rect.y = position[1];
     dst_rect.w = static_cast<float>(texture_width) * scale;
     dst_rect.h = static_cast<float>(texture_height) * scale;
 

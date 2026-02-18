@@ -2,7 +2,7 @@
 
 #include <string>
 #include <SDL3/SDL.h>
-#include "Maths.hpp"
+#include <vector>
 
 class Sprite
 {
@@ -14,10 +14,10 @@ class Sprite
     [[nodiscard]] SDL_FRect getDrawRect() const;
     void setDrawRect(SDL_FRect new_draw_rect);
     [[nodiscard]] SDL_Texture* getTexture() const;
-    void setPosition(const Vector2f* new_position);
-    [[nodiscard]] Vector2f getPosition() const;
+    void setPosition(const std::vector<float>* new_position);
+    [[nodiscard]] std::vector<float> getPosition() const;
     private:
-    Vector2f position{0, 0};
+    std::vector<float> position{0, 0};
     SDL_Texture* texture;
     int texture_width;
     int texture_height;
