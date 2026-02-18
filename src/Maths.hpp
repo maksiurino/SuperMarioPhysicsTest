@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 class Maths
 {
@@ -37,6 +38,13 @@ struct Vector2
     Vector2() : x(0), y(0) {}
     Vector2(T x, T y) : x(x), y(y) {}
 };
+
+template <typename T>
+std::ostream& operator<<(std::ostream& out, const Vector2<T>& v)
+{
+    out << "(" << v.x << ", " << v.y << ")";
+    return out;
+}
 
 template <typename T>
 struct Vector3

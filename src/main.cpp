@@ -73,6 +73,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     sprite->draw(renderer);
     const Vector2f* newPos = sprite->getPosition().addX(1);
+    SDL_Log(newPos);
     sprite->setPosition(newPos);
 
     SDL_RenderPresent(renderer);  /* put it all on the screen! */

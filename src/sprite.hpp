@@ -8,7 +8,6 @@ class Sprite
 {
     public:
     Sprite(const std::string& path, SDL_Renderer *renderer);
-    Vector2f position = Vector2f();
     void draw(SDL_Renderer *renderer) const;
     [[nodiscard]] float getScale() const;
     void setScale(float new_scale);
@@ -18,6 +17,7 @@ class Sprite
     void setPosition(const Vector2f* new_position);
     [[nodiscard]] Vector2f getPosition() const;
     private:
+    Vector2f position{0, 0};
     SDL_Texture* texture;
     int texture_width;
     int texture_height;
