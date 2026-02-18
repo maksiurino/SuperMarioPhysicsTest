@@ -7,7 +7,12 @@ Sprite::Sprite(const std::string& path, SDL_Renderer *renderer)
     SDL_Surface* surface = SDL_LoadPNG(png_path);
     if (!surface)
     {
-        SDL_Log("Couldn't load png: %s", SDL_GetError());
+        SDL_ShowSimpleMessageBox(
+            SDL_MESSAGEBOX_ERROR,
+            "Error",
+            SDL_GetError(),
+            nullptr
+        );
         return;
     }
 
@@ -18,7 +23,12 @@ Sprite::Sprite(const std::string& path, SDL_Renderer *renderer)
 
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     if (!texture) {
-        SDL_Log("Couldn't create static texture: %s", SDL_GetError());
+        SDL_ShowSimpleMessageBox(
+            SDL_MESSAGEBOX_ERROR,
+            "Error",
+            ("Couldn't create static texture: " + std::string(SDL_GetError()) + "\n").c_str(),
+            nullptr
+        );
         return;
     }
 
@@ -49,6 +59,16 @@ void Sprite::setDrawRect(const SDL_FRect new_draw_rect)
 {
     draw_rect = new_draw_rect;
     draw_rect_set = true;
+}
+
+void Sprite::setPosition(const Vector2f* new_position)
+{
+    position = *new_position;
+}
+
+Vector2f Sprite::getPosition() const
+{
+    return position;
 }
 
 void Sprite::draw(SDL_Renderer* renderer) const

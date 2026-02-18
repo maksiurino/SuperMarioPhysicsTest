@@ -15,6 +15,8 @@ class Sprite
     [[nodiscard]] SDL_FRect getDrawRect() const;
     void setDrawRect(SDL_FRect new_draw_rect);
     [[nodiscard]] SDL_Texture* getTexture() const;
+    void setPosition(const Vector2f* new_position);
+    [[nodiscard]] Vector2f getPosition() const;
     private:
     SDL_Texture* texture;
     int texture_width;

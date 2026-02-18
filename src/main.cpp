@@ -20,20 +20,30 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 
     if (!SDL_Init(SDL_INIT_VIDEO))
     {
-        SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());
+        SDL_ShowSimpleMessageBox(
+            SDL_MESSAGEBOX_ERROR,
+            "Error",
+            ("Couldn't initialize SDL: " + std::string(SDL_GetError()) + "\n").c_str(),
+            nullptr
+        );
         return SDL_APP_FAILURE;
     }
 
     if (!SDL_CreateWindowAndRenderer("Super Mario Physics Test", WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE, &window, &renderer))
     {
-        SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
+        SDL_ShowSimpleMessageBox(
+            SDL_MESSAGEBOX_ERROR,
+            "Error",
+            ("Couldn't create window/renderer: " + std::string(SDL_GetError()) + "\n").c_str(),
+            nullptr
+        );
         return SDL_APP_FAILURE;
     }
     SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_LETTERBOX);
 
     SDL_SetDefaultTextureScaleMode(renderer, SDL_SCALEMODE_NEAREST);
 
-    sprite = new Sprite("Sprite/MarioSmall", renderer);
+    sprite = new Sprite("Sprite\\MarioSmall", renderer);
     sprite->setScale(3);
     sprite->setDrawRect(SDL_FRect{0, 1, 12, 16});
 
@@ -62,6 +72,8 @@ SDL_AppResult SDL_AppIterate(void *appstate)
        stamp, there isn't a limit to the number of times you can draw with it. */
 
     sprite->draw(renderer);
+    const Vector2f* newPos = sprite->getPosition().addX(1);
+    sprite->setPosition(newPos);
 
     SDL_RenderPresent(renderer);  /* put it all on the screen! */
 

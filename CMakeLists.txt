@@ -19,7 +19,7 @@ FetchContent_Declare(nlohmann_json
 )
 FetchContent_MakeAvailable(nlohmann_json)
 
-add_executable(SuperMarioPhysicsTest
+add_executable(SuperMarioPhysicsTest WIN32
         src/main.cpp
         src/sprite.cpp
         src/sprite.hpp
